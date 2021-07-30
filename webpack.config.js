@@ -3,6 +3,7 @@ const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin')
 
 let mode = 'development'
 let target = 'web'
@@ -12,6 +13,15 @@ const plugins = [
   new HtmlWebpackPlugin({
     template: './src/index.html',
     favicon: './src/images/favicon.png',
+  }),
+  new ModuleFederationPlugin({
+    name: 'helx',
+    library: { type: 'var', name: 'helx' },
+    filename: 'remoteEntry.js',
+    remotes: {
+      search: 'search',
+    },
+    shared: ['react', 'react-dom', 'antd'],
   }),
 ]
 

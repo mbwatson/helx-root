@@ -2,30 +2,18 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
   min-height: 100vh;
   background: linear-gradient(120deg, var(--color-bg), var(--color-renci));
+  border: 1px solid red;
 }
 
-.title {
-  font-weight: 100;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.menu-bar {
+  border: 1px solid blue;
+  padding: 1rem;
 }
 
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  33% {
-    transform: rotate(65deg);
-  }
-  100% {
-    transform: rotate(60deg);
-  }
-}
-
-.react-logo {
-  animation: spin infinite 1000ms ease-out;
+.main-content {
+  border: 1px solid green;
+  flex: 1;
 }
