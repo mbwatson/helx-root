@@ -10,17 +10,45 @@
 .main-header {
   width: 100%;
   position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  height: 4rem;
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 3px;
+    background-image: linear-gradient(90deg, var(--color-unc-azalea-pink), var(--color-unc-sunburst-yellow));
+  }
 }
 
-.header:before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 3px;
-  background-image: linear-gradient(90deg, var(--color-unc-azalea-pink), var(--color-unc-sunburst-yellow));
+
+.brand {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+  .logo {
+    padding-left: 1rem;
+  }
+  .name {
+    font-weight: bold;
+  }
 }
+
+.main-menu {
+  border: 0;
+  .menu-item {
+    font-weight: bold;
+  }
+}
+
 
 .main-content {
   flex: 1;
