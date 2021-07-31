@@ -21,7 +21,11 @@ const plugins = [
     remotes: {
       search: 'search',
     },
-    shared: ['react', 'react-dom', 'antd'],
+    shared: {
+      'react': { singleton: true },
+      'react-dom': { singleton: true },
+      'antd': { singleton: true },
+    },
   }),
 ]
 
@@ -88,5 +92,6 @@ module.exports = {
   devServer: {
     contentBase: './dist',
     hot: true,
+    port: 3030,
   }
 }
