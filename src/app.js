@@ -29,7 +29,7 @@ if (workspacesEnabled) {
 if (searchEnabled) {
   locations.push({ text: 'SEARCH',
     path: '/search',
-    props: { basePath: '/search' },
+    props: { config: { searchURL: 'https://helx.renci.org', basePath: '/' } },
     Component: searchEnabled ? React.lazy(() => import('search/App')) : null },
   )
 }
