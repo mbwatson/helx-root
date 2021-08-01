@@ -1,3 +1,3 @@
-# RENCI React Starter
+# HeLx Root
 
-See [RENCI/create-renci-app](https://github.com/RENCI/create-renci-app).
+
