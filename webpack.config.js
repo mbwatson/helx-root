@@ -1,14 +1,21 @@
 const path = require('path')
+const webpack = require('webpack')
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin')
+const dotenv = require('dotenv').config({
+  path: path.join(__dirname, '.env')
+})
 
 let mode = 'development'
 let target = 'web'
 const plugins = [
   new CleanWebpackPlugin(),
+  new webpack.DefinePlugin( {
+    'process.env': dotenv.parsed
+  }),
   new MiniCssExtractPlugin(),
   new HtmlWebpackPlugin({
     template: './src/index.html',
@@ -22,9 +29,9 @@ const plugins = [
       search: 'search',
     },
     shared: {
-      'react': { singleton: true },
-      'react-dom': { singleton: true },
-      'antd': { singleton: true },
+      'react': { singleton: true, requiredVersion: '^17.0.0' },
+      'react-dom': { singleton: true, requiredVersion: '^17.0.0' },
+      'antd': { singleton: true, requiredVersion: '^4.16.9' },
     },
   }),
 ]
@@ -51,7 +58,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(png|jpe?g|gif|svg)$/i,
+        test: /\.(png|jpe?g|gif|svg|webp)$/i,
         // type:
         //   "asset/inline": base-64 inline images in js bundle
         //   "asset/resource": images will be imported as separate resources
