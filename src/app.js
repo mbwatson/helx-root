@@ -4,7 +4,7 @@ import "antd/dist/antd.css";
 import { Link, Router } from '@reach/router'
 import HeLxLogo from './images/helx-logo.png'
 import './app.scss'
-import { Home, Support, Workspaces } from './views'
+import { Home, Support, Workspaces, NotFound } from './views'
 
 const { Content } = Layout
 const { SubMenu } = Menu
@@ -20,14 +20,25 @@ const locations = [
 ]
 
 if (workspacesEnabled) {
-  locations.push({ text: 'WORKSPACES', path: '/workspaces', Component: workspacesEnabled ? () => <Workspaces /> : null })
+  locations.push({ text: 'WORKSPACES',
+    path: '/workspaces',
+    Component: workspacesEnabled ? () => <Workspaces /> : null },
+  )
 }
 
 if (searchEnabled) {
-  locations.push({ text: 'SEARCH', path: '/search', Component: searchEnabled ? React.lazy(() => import('search/App')) : null })
+  locations.push({ text: 'SEARCH',
+    path: '/search',
+    props: { basePath: '/search' },
+    Component: searchEnabled ? React.lazy(() => import('search/App')) : null },
+  )
 }
 
-locations.push({ text: 'SUPPORT', path: '/support', Component: Support })
+locations.push({
+  text: 'SUPPORT',
+  path: '/support',
+  Component: Support,
+})
 
 //
 
@@ -54,7 +65,14 @@ export const App = () => {
       <div className="main-content">
         <Suspense fallback={ <Spin className="loading" /> }>
           <Router>
-            { locations.map(({ text, path, Component }) => <Component key={ text } exact path={ path } />) }
+            {
+              locations.map(({ text, path, Component, props = {} }) => {
+                return (
+                  <Component key={ text } exact path={ path } { ...props } />
+                )
+              })
+            }
+            <NotFound default />
           </Router>
         </Suspense>
       </div>
