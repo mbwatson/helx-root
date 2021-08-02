@@ -7,7 +7,6 @@ import './app.scss'
 import { Home, Support, Workspaces, NotFound } from './views'
 
 const { Content } = Layout
-const { SubMenu } = Menu
 const { Title } = Typography
 
 //
